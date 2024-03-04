@@ -8,7 +8,7 @@ const TILE_STATUSES = {
 export function createBoard(boardSize, numberOfMines) {
     const board = []
     const minePositions = getMinePositions(boardSize, numberOfMines)
-    console.log(minePositions)
+    
     for (let x = 0; x < boardSize; x++) {
         const row = []
         for (let y= 0; y < boardSize; y++) {
@@ -35,6 +35,17 @@ export function createBoard(boardSize, numberOfMines) {
     }
 
     return board
+}
+
+export function markTile(tile) {
+    if (tile.status !== TILE_STATUSES.HIDDEN && tile.status !== TILE_STATUSES.MARKED) {
+        return
+    }
+    if (tile.status === TILE_STATUSES.MARKED) {
+        tile.status = TILE_STATUSES.HIDDEN
+    } else {
+        tile.status = TILE_STATUSES.MARKED
+    }
 }
 
 function getMinePositions(boardSize, numberOfMines) {
